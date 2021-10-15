@@ -65,6 +65,7 @@ class ContaBancaria(metaclass=ABCMeta):
             raise E.ErroNegativo(quantidade)
         else:
             self.saldo += quantidade
+            print(f'Deposito de {quantidade}R$ realizado.')
 
     # Função para realizar Saque
     def saque(self, quantidade):
@@ -74,10 +75,11 @@ class ContaBancaria(metaclass=ABCMeta):
             raise E.ErroSaldo(quantidade)
         else:
             self.saldo -= quantidade
+            print(f'Saque realizado no valor de {quantidade}R$')
     
     # Função para consultar saldo
     def checa_saldo(self):
-        return self.saldo
+        return f'O saldo da conta é de: {self.saldo}R$'
 
     # Função para consultar o rendimento
     @abstractmethod
@@ -86,7 +88,7 @@ class ContaBancaria(metaclass=ABCMeta):
 
     # Função para tratar acesso a atributos desconhecidos
     def __getattr__(self, nome):
-        print('Atributo desconhecido:', nome)
+        print('Atributo/Metodo desconhecido:', nome)
         return self.metodo_desconhecido
 
     # Função para metodos desconhecidos
@@ -125,7 +127,7 @@ class ContaBancaria(metaclass=ABCMeta):
 
     @staticmethod
     def saque_verboso(obj, valor):
-        ContaBancaria.mostra_dados_basico(obj)
+        ContaBancaria.mostra_dados_basicos(obj)
         if obj == ContaCorrente:
             print(f'Limite da conta: {obj.limite}')
         elif obj == ContaInvestimento:
