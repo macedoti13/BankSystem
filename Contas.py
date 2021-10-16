@@ -93,7 +93,7 @@ class ContaBancaria(metaclass=ABCMeta):
 
     # Função para metodos desconhecidos
     def metodo_desconhecido(self):
-        return 'Método desconhecido!'
+        return -1
 
     # Função para mostrar a quantidade de contas criadas ao todo
     @staticmethod
