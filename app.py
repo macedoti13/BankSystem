@@ -48,7 +48,6 @@ print(contaPoup.checa_saldo())
 contaPoup.testeDeAtributoDesconhecido
 print(contaPoup.testeDeMetodoDesconhecido())
 print()
-
 print('Testando contador de contas')
 print()
 ContaBancaria.quantidade_contas()
