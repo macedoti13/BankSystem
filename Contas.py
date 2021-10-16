@@ -135,7 +135,6 @@ class ContaBancaria(metaclass=ABCMeta):
         elif obj == ContaPoupanca:
             print(f'Rendimento da conta: {obj.rendimento}')
         obj.saque(valor)
-        print(f'Saque de {valor} realizado.')
         print(obj.checa_saldo())
         
 
