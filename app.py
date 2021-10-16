@@ -62,3 +62,44 @@ print()
 ContaBancaria.saque_verboso(contaInvest, 100)
 print()
 ContaBancaria.saque_verboso(contaPoup, 100)
+print()
+print('Testando criação de contas invalidas')
+print()
+try:
+    print('conta corrente')
+    print('testando nr invalido')
+    contaA = ContaCorrente('-1234', 'joão felix', '34567834569', 9000, -0.5)
+    print('testando nome invalido')
+    contaB = ContaCorrente('0004', 'testecommaisde50letrasparadarerrodenomeeverseestafuncionando', '12345678912', 8000, -0.5)
+    print('testando cpf invalido')
+    contaC = ContaCorrente('0005', 'vitor pires', '12345', 7000, -0.8)
+    print('testando saldo invalido')
+    contaD = ContaCorrente('0006', 'joão terra', '12345678934', -500, -0.8)
+    print('testando limite invalido')
+    contaE = ContaCorrente('0006', 'augusto', '98765432123', 300, 13)
+except E.NumeroInvalido as e:
+    print(e)
+except E.NomeInvalido as e:
+    print(e)
+except E.CpfInvalido as e:
+    print(e)
+except E.SaldoInvalido as e:
+    print(e)
+except E.LimiteInvalido as e:
+    print(e)
+except E.ErroSaldo as e:
+    print(e)
+print()
+print('testando operações invalidas')
+try:
+    contaCorr.saque(100000)
+except E.ErroSaldo as e:
+    print(e)
+try:
+    contaCorr.saque(-100)
+except E.ErroNegativo as e:
+    print(e)
+try:
+    contaCorr.deposito(-1)
+except E.ErroNegativo as e:
+    print(e)
