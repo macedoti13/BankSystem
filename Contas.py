@@ -192,7 +192,7 @@ class ContaInvestimento(ContaBancaria):
 
     def __init__(self, numero_conta, nome_cliente, cpf, saldo, risco):
         super().__init__(numero_conta, nome_cliente, cpf, saldo)
-        if str(risco) != 'alto' and str(risco).lower() != 'medio' and str(risco).lower() != 'baixo':
+        if str(risco).lower() != 'alto' and str(risco).lower() != 'medio' and str(risco).lower() != 'baixo':
             raise E.RiscoInvalido(risco)
         else:
             self.__risco = risco

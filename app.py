@@ -1,3 +1,4 @@
+import sys
 from Contas import ContaBancaria, ContaCorrente, ContaInvestimento, ContaPoupanca
 import Contas as C
 import Erros as E
