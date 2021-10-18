@@ -18,7 +18,7 @@ class ErroSaldo(Exception):
 
 
 class NumeroInvalido(Exception):
-    """ Classe para impedir a entrada de numeros de conta inválidos"""
+    """ Classe para impedir a entrada de numeros de conta invalidos"""
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
@@ -27,7 +27,7 @@ class NumeroInvalido(Exception):
 
 
 class NomeInvalido(Exception):
-    """ Classe para impedir a entrada de nomes inválidos"""
+    """ Classe para impedir a entrada de nomes invalidos"""
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
@@ -36,7 +36,7 @@ class NomeInvalido(Exception):
 
 
 class CpfInvalido(Exception):
-    """ Classe para impedir a entrada de cpfs inválidos """
+    """ Classe para impedir a entrada de cpfs invalidos """
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
@@ -45,7 +45,7 @@ class CpfInvalido(Exception):
 
 
 class SaldoInvalido(Exception):
-    """ Classe para impedir a entrada de um saldo inválido """
+    """ Classe para impedir a entrada de um saldo invalido """
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
@@ -54,7 +54,7 @@ class SaldoInvalido(Exception):
 
 
 class LimiteInvalido(Exception):
-    """ Classe para impedir a entrada de um limite inválido """
+    """ Classe para impedir a entrada de um limite invalido """
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
@@ -63,7 +63,7 @@ class LimiteInvalido(Exception):
 
 
 class RiscoInvalido(Exception):
-    """ Classe para impedir a entrada de um risco inválido """
+    """ Classe para impedir a entrada de um risco invalido """
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
@@ -72,7 +72,7 @@ class RiscoInvalido(Exception):
 
 
 class RendimentoInvalido(Exception):
-    """ Classe para impedir a entrada de um rendimento inválido """
+    """ Classe para impedir a entrada de um rendimento invalido """
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
