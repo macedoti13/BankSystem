@@ -3,7 +3,6 @@ import Contas as C
 import Erros as E
 import Moeda as M
 import sys
-import os.path
 
 def readfile(a):
     global tipo_conta
