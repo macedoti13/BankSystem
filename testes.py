@@ -193,8 +193,7 @@ with open(nome_arq, 'r') as arq:
         arqs.write(f'Rendimento de 30 dias da conta corrente: {str(contaC.checa_rendimento(30))} \n')
         arqs.write(f'Rendimento de 30 dias da conta Poupanca: {str(contaP.checa_rendimento(30))} \n')
         arqs.write(f'Rendimento de 30 dias da conta Investimento: {str(contaI.checa_rendimento(30))} \n')
-        
-
+    
     i+=1
         
         
