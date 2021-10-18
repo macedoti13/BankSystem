@@ -7,7 +7,7 @@ import Moeda as M
 
 contaInvest = C.ContaInvestimento('0001', 'Thiago de Almeida Macedo', '05343493878', 1000, 'alto')
 contaCorr = C.ContaCorrente('0002', 'Antonio Macedo', '34559303452', 10000, -500)
-contaPoup = C.ContaPoupanca('0003', 'Simone de Almeida', '38475937495', 3000, 0.5)
+contaPoup = C.ContaPoupanca('0003', 'Simone de Almeida', '38475937495', 3000, 0.6)
 print()
 print('testando conta investimento')
 print()
