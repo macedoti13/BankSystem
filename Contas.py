@@ -276,4 +276,4 @@ class ContaPoupanca(ContaBancaria):
 
     def checa_rendimento(self, dias):
         a = (self.saldo * self.rendimento) * (dias/30)
-        return f'O rendimento de seu saldo nos proximos {dias} dias e de: {a}R$'
+        return f'O rendimento de seu saldo nos proximos {dias} dias eh de: {a}R$'
