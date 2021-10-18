@@ -1,7 +1,6 @@
-from Contas import ContaBancaria as CB, ContaCorrente, ContaInvestimento, ContaPoupanca
-import Contas as C
-import Erros as E
-import Moeda as M
+from Banco.Contas import ContaBancaria as CB, ContaCorrente, ContaInvestimento, ContaPoupanca
+import Banco.Erros as E
+import Banco.Moeda as M
 import sys
 
 def readfile(a):
@@ -16,8 +15,8 @@ def readfile(a):
 
     if a.find('saldoInicial:') != -1:
         global saldo
-        saldo = a[14:]
-        saldo = int(saldo)
+        print(a[14:])
+        saldo = int(a[14:])
 
     if a.find('id:') != -1: 
         global numero_conta

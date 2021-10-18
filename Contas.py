@@ -1,6 +1,6 @@
 from abc import ABCMeta, abstractmethod
-import Erros as E
-import Moeda as M
+from Banco import Erros as E
+from Banco import Moeda as M
 
 # Classes relacionadas às contas bancarias
 class ContaBancaria(metaclass=ABCMeta):
