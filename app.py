@@ -3,6 +3,7 @@ import Contas as C
 import Erros as E
 import Moeda as M
 import sys
+import os.path
 
 def readfile(a):
     global tipo_conta
@@ -143,11 +144,12 @@ def readfile(a):
                 arql.write(str(e) + '\n')
 
 i = 1
+path = 'Individuos/'
 for file in sys.argv:
     if file == 'app.py':
         pass
     else:
-        arql = open(f'{i}.log','w')
+        arql = open(f'{path}/{i}.log','w')
         with open(file, 'r') as arq:
             tipo_conta = ''
             nome = arq.readline()
@@ -160,7 +162,7 @@ for file in sys.argv:
             
         arql.close()
             
-        with open(f'{i}.saida','w') as arqs:
+        with open(f'{path}/{i}.saida','w') as arqs:
             arqs.write(f'Saldo da conta Corrente: {str(contaC.checa_saldo())} \n')
             arqs.write(f'Saldo da conta Poupanca: {str(contaP.checa_saldo())} \n')
             arqs.write(f'Saldo da conta Investimento: {str(contaI.checa_saldo())} \n')
