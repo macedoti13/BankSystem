@@ -195,5 +195,3 @@ with open(nome_arq, 'r') as arq:
         arqs.write(f'Rendimento de 30 dias da conta Investimento: {str(contaI.checa_rendimento(30))} \n')
     
     i+=1
-        
-        

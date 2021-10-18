@@ -22,6 +22,7 @@ def readfile(a):
     if a.find('id:') != -1: 
         global numero_conta
         numero_conta = a[4:]
+        numero_conta = int(numero_conta)
 
     if a.find('limiteChequeEspecial:') != -1:
         global limite
@@ -44,7 +45,7 @@ def readfile(a):
     if a.find('taxaRendimento:') != -1:
         global rendimento
         rendimento = a[16:]
-        rendimento = float(rendimento)
+        #rendimento = float(rendimento)
         global contaP
         try:
             contaP = ContaPoupanca(numero_conta, nome, cpf, saldo, rendimento)
