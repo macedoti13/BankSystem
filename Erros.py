@@ -13,7 +13,7 @@ class ErroSaldo(Exception):
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
-        return f'Você não tem saldo suficiente para fazer saque de: {self.valor}R$.'
+        return f'Voce nao tem saldo suficiente para fazer saque de: {self.valor}R$.'
 
 
 
@@ -22,7 +22,7 @@ class NumeroInvalido(Exception):
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
-        return f'Numero Inválido: {self.valor}.'
+        return f'Numero Invalido: {self.valor}.'
 
 
 
@@ -31,7 +31,7 @@ class NomeInvalido(Exception):
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
-        return f'Nome Inválido: {self.valor}.'
+        return f'Nome Invalido: {self.valor}.'
 
 
 
@@ -40,7 +40,7 @@ class CpfInvalido(Exception):
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
-        return f'CPF Inválido: {self.valor}.'
+        return f'CPF Invalido: {self.valor}.'
 
 
 
@@ -49,7 +49,7 @@ class SaldoInvalido(Exception):
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
-        return f'Saldo Inválido: {self.valor}R$.'
+        return f'Saldo Invalido: {self.valor}R$.'
 
 
 
@@ -58,7 +58,7 @@ class LimiteInvalido(Exception):
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
-        return f'Limite Inválido: {self.valor}R$.'
+        return f'Limite Invalido: {self.valor}R$.'
 
 
 
@@ -67,7 +67,7 @@ class RiscoInvalido(Exception):
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
-        return f'Risco Inválido: {self.valor}.'
+        return f'Risco Invalido: {self.valor}.'
 
 
 
@@ -76,4 +76,4 @@ class RendimentoInvalido(Exception):
     def __init__(self, valor):
         self.valor = valor
     def __str__(self):
-        return f'Rendimento Inválido: {self.valor}%.'
+        return f'Rendimento Invalido: {self.valor}%.'

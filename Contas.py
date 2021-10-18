@@ -79,7 +79,7 @@ class ContaBancaria(metaclass=ABCMeta):
     
     # Função para consultar saldo
     def checa_saldo(self):
-        return f'O saldo da conta é de: {self.saldo}R$'
+        return f'O saldo da conta e de: {self.saldo}R$'
 
     # Função para consultar o rendimento
     @abstractmethod
@@ -178,7 +178,7 @@ class ContaCorrente(ContaBancaria):
 
     def checa_rendimento(self, dias):
         a = (self.saldo * self.rendimento) * (dias/30)
-        return f'O rendimento de seu saldo nos próximos {dias} dias é de: {a}R$'
+        return f'O rendimento de seu saldo nos proximos {dias} dias e de: {a}R$'
 
 
 
@@ -232,7 +232,7 @@ class ContaInvestimento(ContaBancaria):
 
     def checa_rendimento(self, dias):
         a = (self.saldo * self.rendimento) * (dias/30)
-        return f'O rendimento de seu saldo nos próximos {dias} dias é de: {a}R$'
+        return f'O rendimento de seu saldo nos proximos {dias} dias e de: {a}R$'
 
 
 
@@ -268,7 +268,7 @@ class ContaPoupanca(ContaBancaria):
 
     @staticmethod
     def nova_conta(nome_cliente):
-        print(f'Uma nova conta poupança foi criada em nome de {nome_cliente}.')
+        print(f'Uma nova conta poupanca foi criada em nome de {nome_cliente}.')
 
     @classmethod
     def add_conta_poupanca(cls):
@@ -276,4 +276,4 @@ class ContaPoupanca(ContaBancaria):
 
     def checa_rendimento(self, dias):
         a = (self.saldo * self.rendimento) * (dias/30)
-        return f'O rendimento de seu saldo nos próximos {dias} dias é de: {a}R$'
+        return f'O rendimento de seu saldo nos proximos {dias} dias e de: {a}R$'
