@@ -1,4 +1,4 @@
-from Contas import ContaBancaria, ContaCorrente, ContaInvestimento, ContaPoupanca
+from Contas import ContaBancaria as CB, ContaCorrente, ContaInvestimento, ContaPoupanca
 import Contas as C
 import Erros as E
 import Moeda as M
@@ -21,7 +21,10 @@ with open(nome_arq, 'w') as arq:
     arq.write('tipoRisco: Baixo\n')
     arq.write('sacar: contaInvestimento -> 20\n')
     arq.write('sacar: contaCorrente -> 420\n')
+    arq.write('sacar: contaPoupanca -> 909\n')
     arq.write('depositar: contaCorrente -> 20\n')
+    arq.write('depositar: contaPoupanca -> 20\n')
+    arq.write('depositar: contaInvestimento -> 20\n')
     arq.write('saldo: contaCorrente\n')
     arq.write('saldo: contaPoupanca\n')
     arq.write('saldo: contaInvestimento\n')
@@ -32,82 +35,166 @@ with open(nome_arq, 'w') as arq:
 
 
 def readfile(a):
+    global tipo_conta
     if a.find('criar:') != -1:
         if a.find('contaInvestimento') != -1:
-            tipo = 'contaInvestimento'
+            tipo_conta = 'contaInvestimento'
         elif a.find('contaCorrente') != -1:
-            tipo = 'contaCorrente'
+            tipo_conta = 'contaCorrente'
         elif a.find('contaPoupanca') != -1:
-            tipo = 'contaPoupanca'
+            tipo_conta = 'contaPoupanca'
 
     if a.find('saldoInicial:') != -1:
         global saldo
         saldo = a[14:]
-        print('saldo: ' + saldo)
         saldo = int(saldo)
 
-    if a.find('id:') != -1:
-        global id 
-        id = a[4:]
-        print('numero conta: ' + id)
+    if a.find('id:') != -1: 
+        global numero_conta
+        numero_conta = a[4:]
 
-    if a.find('limiteChequeEspecial::') != -1:
+    if a.find('limiteChequeEspecial:') != -1:
         global limite
         limite = a[22:]
-        print('limite: ' + limite)
         limite = int(limite)
+        global contaC
+        try:
+            contaC = ContaCorrente(numero_conta, nome, cpf, saldo, limite)
+        except E.NumeroInvalido as e:
+            arql.write(str(e,'\n'))
+        except E.NomeInvalido as e:
+            arql.write(str(e,'\n'))
+        except E.CpfInvalido as e:
+            arql.write(str(e,'\n'))
+        except E.LimiteInvalido as e:
+            arql.write(str(e,'\n'))
+        except E.SaldoInvalido as e:
+            arql.write(str(e,'\n'))
 
     if a.find('taxaRendimento:') != -1:
         global rendimento
         rendimento = a[16:]
-        print('rendimento: ' + rendimento)
         rendimento = float(rendimento)
+        global contaP
+        try:
+            contaP = ContaPoupanca(numero_conta, nome, cpf, saldo, rendimento)
+        except E.NumeroInvalido as e:
+            arql.write(str(e) + '\n')
+        except E.NomeInvalido as e:
+            arql.write(str(e) + '\n')
+        except E.CpfInvalido as e:
+            arql.write(str(e) + '\n')
+        except E.RendimentoInvalido as e:
+            arql.write(str(e) + '\n')
+        except E.SaldoInvalido as e:
+            arql.write(str(e) + '\n')
 
     if a.find('tipoRisco:') != -1:
         global risco
-        risco = a[11:]
-        print('risco:' + risco)
+        risco = a[11:16]
+        risco = risco.lower()
+        global contaI
+        try:
+            contaI = ContaInvestimento(numero_conta, nome, cpf, saldo, risco)
+        except E.NumeroInvalido as e:
+            arql.write(str(e) + '\n')
+        except E.NomeInvalido as e:
+            arql.write(str(e) + '\n')
+        except E.CpfInvalido as e:
+            arql.write(str(e) + '\n')
+        except E.RiscoInvalido as e:
+            arql.write(str(e) + '\n')
+        except E.SaldoInvalido as e:
+            arql.write(str(e) + '\n')
 
     if a.find('sacar:') != -1:
         if a.find('contaInvestimento') != -1: 
-            print('saque na conta investimento')
+            try:
+                contaI.saque(int(a[28:]))
+            except E.ErroSaldo as e:
+                arql.write(str(e) + '\n')
+            except E.ErroNegativo as e:
+                arql.write(str(e) + '\n')
         elif a.find('contaCorrente') != -1:
-            print('Saque na conta corrente') ########
+            try:
+                contaC.saque_verboso(contaC, int(a[24:]))
+            except E.ErroSaldo as e:
+                arql.write(str(e) + '\n')
+            except E.ErroNegativo as e:
+                arql.write(str(e) + '\n')
         elif a.find('contaPoupanca') != -1:
-            print('saque na conta poupanca') ##########
+            try:
+                contaP.saque(int(a[24:]))
+            except E.ErroSaldo as e:
+                arql.write(str(e) + '\n')
+            except E.ErroNegativo as e:
+                arql.write(str(e) + '\n')
 
     if a.find('depositar:') != -1: 
         if a.find('contaInvestimento') != -1:
-            print('deposito na conta investimento') ########
+            try:
+                contaI.deposito(int(a[32:]))
+            except E.ErroNegativo as e:
+                arql.write(str(e) + '\n')
         elif a.find('contaCorrente') != -1:
-            print('deposito na conta corrente') ########
+            try:
+                contaC.deposito(int(a[28:]))
+            except E.ErroNegativo as e:
+                arql.write(str(e) + '\n')
         elif a.find('contaPoupanca') != -1:
-            print('deposito na conta poupanca') ###########
+            try:
+                contaP.deposito(int(a[28:]))
+            except E.ErroNegativo as e:
+                arql.write(str(e) + '\n')
 
     if a.find('saldo:') != -1:
         if a.find('contaInvestimento') != -1:
-            print('saldo da conta investimento') #########
+            contaI.checa_saldo()
         elif a.find('contaCorrente') != -1:
-            print('saldo da conta corrente') ##########
+            contaC.checa_saldo()
         elif a.find('contaPoupanca') != -1:
-            print('saldo da conta poupanca') ###########
+            contaP.checa_saldo()
 
     if a.find('rendimento:') != -1:
         if a.find('contaInvestimento') != -1:
-            print('rendimento da conta investimento') #######
+            try:
+                contaI.checa_rendimento(int(a[33:35]))
+            except E.ErroNegativo as e:
+                arql.write(str(e) + '\n')
         elif a.find('contaCorrente') != -1:
-            print('rendimento da conta corrente') ########
+            try:
+                contaC.checa_rendimento(int(a[29:31]))
+            except E.ErroNegativo as e:
+                arql.write(str(e) + '\n')
         elif a.find('contaPoupanca') != -1: 
-            print('rendimento da conta poupanca') ######
-
-
+            try:
+                contaP.checa_rendimento(int(a[29:31]))
+            except E.ErroNegativo as e:
+                arql.write(str(e) + '\n')
 
 with open(nome_arq, 'r') as arq:
+    i=1
     nome = arq.readline()
     cpf = arq.readline()
-    cpf = cpf[5:]
-    print(f'nome = {nome}', end='')
-    print(f'cpf = {cpf}', end='')
+    cpf = cpf[5:16]
+    cpf = str(cpf)
+    tipo_conta = ''
+    arql = open(f'{i}.log','w')
+    
     for line in arq:
         a = line
-        print(a, end='')
+        readfile(a)
+    arql.close()
+    
+    with open(f'{i}.saida','w') as arqs:
+        arqs.write(f'Saldo da conta Corrente: {str(contaC.checa_saldo())} \n')
+        arqs.write(f'Saldo da conta Poupanca: {str(contaP.checa_saldo())} \n')
+        arqs.write(f'Saldo da conta Investimento: {str(contaI.checa_saldo())} \n')
+        arqs.write(f'Rendimento de 30 dias da conta corrente: {str(contaC.checa_rendimento(30))} \n')
+        arqs.write(f'Rendimento de 30 dias da conta Poupanca: {str(contaP.checa_rendimento(30))} \n')
+        arqs.write(f'Rendimento de 30 dias da conta Investimento: {str(contaI.checa_rendimento(30))} \n')
+        
+
+    i+=1
+        
+        
