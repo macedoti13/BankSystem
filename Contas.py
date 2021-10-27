@@ -4,11 +4,41 @@ from Banco import Moeda as M
 
 # Classes relacionadas às contas bancarias
 class ContaBancaria(metaclass=ABCMeta):
-    """ Classe da conta bancaria padrão """
+    """Classe da conta bancaria padrão. Possui diversos metodos padrão para todas as suas subclasses.
+
+    Args:
+        metaclass (ABCMeta, optional): Classe abstrata. Defaults to ABCMeta.
+
+    Raises:
+        E.NumeroInvalido: Tratamento de excessão caso o numero da conta seja invalido.
+        E.NomeInvalido: Tratamento de excessão caso o nome do cliente seja invalido.
+        E.CpfInvalido: Tratamento de excessão caso o cpf do cliente seja invalido.
+        E.SaldoInvalido: Tratamento de excessão caso o saldo da conta seja invalido.
+        E.ErroNegativo: Tratamento de excessão caso o valor do saque ou deposito seja negativo.
+        E.ErroSaldo: Tratamento de excessão caso o cliente tente fazer um saque sem ter saldo suficiente.
+
+    Returns:
+        Objeto: Uma conta bancaria basica, com numero da conta, nome do cliente, cpf e saldo. Essa conta é capaz
+        de realizar saques, depositos e consultar seus dados.
+    """
     contas = 0
     rendimento = 0
 
     def __init__(self, numero_conta, nome_cliente, cpf, saldo):
+        """Função de criação do objeto ContaBancaria.
+
+        Args:
+            numero_conta (str): Numero da conta do cliente.
+            nome_cliente (str): Nome completo do cliente.
+            cpf (str): CPF do cliente.
+            saldo (float): Saldo inicial da conta.
+
+        Raises:
+            E.NumeroInvalido: Excessão caso o numero da conta não esteja dentro do padrão.
+            E.NomeInvalido: Excessão caso o nome do cliente não enteja dentro do padrão.
+            E.CpfInvalido: Excessão caso o CPF não esteja dentro do padrão.
+            E.SaldoInvalido: Excessão caso o saldo da conta não enteja dentro do padrão.
+        """
         if 0 > int(numero_conta) or 9999 < int(numero_conta):
             raise E.NumeroInvalido(numero_conta)
         else:
@@ -31,7 +61,7 @@ class ContaBancaria(metaclass=ABCMeta):
 
         ContaBancaria.add_conta()
         
-    # Getter do atributo numero_conta
+    # Getter do atributo numero_conta    
     @property
     def numero_conta(self):
         return self.__numero_conta
@@ -59,16 +89,33 @@ class ContaBancaria(metaclass=ABCMeta):
         elif isinstance(novo_saldo, float):
             self.__saldo = novo_saldo
 
-    # Função para realizar Depósito
+
     def deposito(self, quantidade):
+        """Realiza um deposito (aumenta o valor do saldo) na conta.
+
+        Args:
+            quantidade (float): Valor a ser adicionado no saldo da conta.
+
+        Raises:
+            E.ErroNegativo: Excessão caso o valor do deposito seja negativo.
+        """
         if quantidade <= 0:
             raise E.ErroNegativo(quantidade)
         else:
             self.saldo += quantidade
             print(f'Deposito de {quantidade}R$ realizado.')
 
-    # Função para realizar Saque
+
     def saque(self, quantidade):
+        """Realiza um saque (diminui o valor do saldo) na conta.
+
+        Args:
+            quantidade (float): Valor a ser retirado do saldo da conta.
+
+        Raises:
+            E.ErroNegativo: Excessão caso o valor do saque seja negativo.
+            E.ErroSaldo: Excessão caso o valor do saque seja maior que o saldo da conta.
+        """
         if quantidade <= 0:
             raise E.ErroNegativo(quantidade)
         elif quantidade > self.saldo:
@@ -77,8 +124,13 @@ class ContaBancaria(metaclass=ABCMeta):
             self.saldo -= quantidade
             print(f'Saque realizado no valor de {quantidade}R$')
     
-    # Função para consultar saldo
+
     def checa_saldo(self):
+        """Consulta o saldo da conta.
+
+        Returns:
+            str: texto formatado que contem o saldo atual da conta.
+        """
         return f'O saldo da conta e de: {self.saldo}R$'
 
     # Função para consultar o rendimento
